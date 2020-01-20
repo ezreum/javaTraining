@@ -1,4 +1,4 @@
-package prueba;
+package t7;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PruebaOS
+ * Servlet implementation class E5
  */
-@WebServlet("/PruebaOS")
-public class PruebaOS extends HttpServlet {
+@WebServlet("/t7/E5")
+public class E5 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     
 
 	/**
@@ -23,8 +26,25 @@ public class PruebaOS extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out= response.getWriter();
-		out.println(System.getProperty("os.name"));
+		PrintWriter out = response.getWriter();
+		String info = getServletContext().getServerInfo();
+		out.println("<table border='1'>");
+		out.println("<tr>");
+		out.println("<th>");
+		out.println("variable");
+		out.println("</th>");
+		out.println("<th>");
+		out.println("información");
+		out.println("</th>");
+		out.println("</tr>");
+		
+		out.println("<tr>");
+		out.println("<td>");
+		out.println(info);
+		out.println("</td>");
+		out.println("</tr>");
+		
+		out.println("</table>");
 	}
 
 	/**
@@ -32,7 +52,6 @@ public class PruebaOS extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
