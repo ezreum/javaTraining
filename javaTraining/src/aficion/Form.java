@@ -31,11 +31,16 @@ public class Form extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
-		String[] hobbies = request.getParameterValues("hobby");
-		int size = hobbies.length-1;
+		
+		if ( name == null || name.isEmpty() ) {
+			request.getRequestDispatcher("/Form").forward(request, response);
+		}
+		String[] hobbies = request.getParameterValues("hobby")!=null?request.getParameterValues("hobby"):new String[0];
+		int size = hobbies.length>0?hobbies.length-1:0;
 		PrintWriter out = response.getWriter();
 		
-		out.print("<h3>hola "+name+". Tus aficiones son: "); 
+		String resultado = "<h3>hola "+name+". Tus aficiones son: ";
+		if (size!=0) {
 		for (String hobby :hobbies) { 
 			
 			/* hobbies[size].equals(hobby)?out.print(hobby):out.print(hobby+" "); */
@@ -43,12 +48,17 @@ public class Form extends HttpServlet {
 		
 			  if(hobbies[size].equals(hobby)) { 
 				  out.print(hobby); 
-				  } else {
+				  }
+			  else {
 			  out.print(hobby+" "); }
 		
 		}
-		
-		out.print("</h3>");
+		}
+		else {
+			resultado="<h3>hola "+name+". No te gusta nada";
+		}
+		resultado+="</h3>";
+		out.println(resultado);
 
 	}
 
