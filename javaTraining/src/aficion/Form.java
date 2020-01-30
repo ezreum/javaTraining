@@ -25,32 +25,38 @@ public class Form extends HttpServlet {
 		out.println("<input type=\"checkbox\" name=\"hobby\" value=\"bailar\">");
 		out.println("<label>Cantar</label>");
 		out.println("<input type=\"checkbox\" name=\"hobby\" value=\"cantar\">");
+		out.println("\n");
+		out.println("<input type=\"submit\" value=\"enviar aficiones\">");		
 		out.println("</form>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
-		
-		if ( name == null || name.isEmpty() ) {
-			request.getRequestDispatcher("/Form").forward(request, response);
-		}
-		String[] hobbies = request.getParameterValues("hobby")!=null?request.getParameterValues("hobby"):new String[0];
-		int size = hobbies.length>0?hobbies.length-1:0;
 		PrintWriter out = response.getWriter();
+		if ( name == null || name.isEmpty() ) {
+			doGet(request, response);
+			out.println("Necesita que se escriba un nombre");
+		}
+		else {
+		String[] hobbies=null;
+		hobbies = request.getParameterValues("hobby")!=null?request.getParameterValues("hobby"):null;
+		
+		
 		
 		String resultado = "<h3>hola "+name+". Tus aficiones son: ";
-		if (size!=0) {
+		if (hobbies!=null ) {
+			int size = hobbies.length>0?hobbies.length-1:0;
 		for (String hobby :hobbies) { 
 			
 			/* hobbies[size].equals(hobby)?out.print(hobby):out.print(hobby+" "); */
 			 
 		
 			  if(hobbies[size].equals(hobby)) { 
-				  out.print(hobby); 
+				  resultado+=" "+hobby;
 				  }
 			  else {
-			  out.print(hobby+" "); }
+			  resultado+=hobby+" "; }
 		
 		}
 		}
@@ -60,6 +66,7 @@ public class Form extends HttpServlet {
 		resultado+="</h3>";
 		out.println(resultado);
 
+		}
 	}
 
 }
