@@ -58,11 +58,9 @@ public class FormSession extends HttpServlet {
 		String pwd = request.getAttribute("clave")!=null?(String)request.getAttribute("clave"):null;
 		String pais = request.getAttribute("pais")!=null?(String)request.getAttribute("pais"):null;
 		
-//		nombre!=null?session.setAttribute("name", nombre):"";
-		
-		
-		session.setAttribute("key", pwd);
-		session.setAttribute("country", pais);
+		session.setAttribute("name",nombre!=null? nombre:"");
+		session.setAttribute("key",pwd!=null? pwd:"");
+		session.setAttribute("country",pais!=null? pais:"");
 		doGet(request, response);
 	}
 
