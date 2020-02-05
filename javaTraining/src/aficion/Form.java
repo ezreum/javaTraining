@@ -49,7 +49,7 @@ public class Form extends HttpServlet {
 			int size = hobbies.length>0?hobbies.length-1:0;
 		for (String hobby :hobbies) { 
 			
-			/* hobbies[size].equals(hobby)?out.print(hobby):out.print(hobby+" "); */
+					/* out.print(hobbies[size].equals(hobby)?" "+hobby:hobby+" "); */
 			 
 		
 			  if(hobbies[size].equals(hobby)) { 
